@@ -1,6 +1,6 @@
 if (window.location.href === "https://webdt.edunet.net/pdf") {
     console.log("extracting...");
-} else if (window.location.href === "https://webdt.edunet.net/viewer/") {
+} else if (window.location.href === "https://webdt.edunet.net/viewer") {
     console.log("viewer not supported");
 } else {
     console.log("invalid url.");
