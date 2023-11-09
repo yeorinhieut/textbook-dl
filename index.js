@@ -1,9 +1,9 @@
 if (window.location.href === "https://webdt.edunet.net/pdf") {
     console.log("extracting...");
 } else if (window.location.href === "https://webdt.edunet.net/viewer/") {
-    console.log("viewer is not supported");
+    console.log("viewer not supported");
 } else {
-    console.log("wrong url.");
+    console.log("invalid url.");
 }
 
 var scriptText = document.querySelectorAll('body > script:nth-child(35)')[0].textContent;
@@ -23,5 +23,5 @@ if (match) {
         })
         .catch(error => console.error("error:", error));
 } else {
-    console.log("failed to extract pdf url");
+    console.log("failed to extract pdf link");
 }
