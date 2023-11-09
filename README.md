@@ -7,7 +7,7 @@ https://webdt.edunet.net/ 다운로더
 
 ## Features
 
-- 온라인교과서(pdf) 다운로드
+- 디지털교과서(pdf) 다운로드
 - viewer는 미지원
 
 
