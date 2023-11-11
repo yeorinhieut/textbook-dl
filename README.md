@@ -20,4 +20,6 @@ https://webdt.edunet.net/ 다운로더
 ## Usage - python
 
 1. 다운로드할 교과서 pdf 보기 페이지 하단의 "페이지 링크 복사" 클릭
-2. [스크립트](https://raw.githubusercontent.com/yeorinhieut/textbook-dl/main/download.py) 실행 후, URL 입력
+2. [스크립트](https://raw.githubusercontent.com/yeorinhieut/textbook-dl/main/download.py) 실행
+3. 실행된 브라우저 창에서 로그인 후 Enter 누르기
+4. 복사한 링크 붙여넣고 기다리기
