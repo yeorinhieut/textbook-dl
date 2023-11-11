@@ -66,7 +66,7 @@ if __name__ == "__main__":
     driver = webdriver.Chrome(options=webdriver.ChromeOptions())
     driver.get("https://webdt.edunet.net/login")
 
-    input("Please log in")
+    input("Please log in and press Enter")
 
     wait_and_redirect(driver, "https://webdt.edunet.net/")
 
