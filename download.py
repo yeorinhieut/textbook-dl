@@ -1,18 +1,25 @@
 from selenium import webdriver
+from selenium.webdriver.common.keys import Keys
+from selenium.webdriver.common.by import By
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
 import time
 import os
 import getpass
 
-def run_selenium_script(url, user_data_dir, download_dir):
-    chrome_options = webdriver.ChromeOptions()
-    chrome_options.add_argument(f'--user-data-dir={user_data_dir}')
+def wait_and_redirect(driver, redirect_url):
+    try:
+        WebDriverWait(driver, 30).until(EC.url_to_be(redirect_url))
+    except Exception as e:
+        print(f"Timeout waiting for redirect to {redirect_url}. Error: {e}")
 
-    driver = webdriver.Chrome(options=chrome_options)
+def run_selenium_script(driver, url, user_data_dir, download_dir):
+    driver.execute_script(f'window.open("{url}","_blank");')
+    new_tab = driver.window_handles[-1]
+    driver.switch_to.window(new_tab)
+    time.sleep(20)
 
     try:
-        driver.get(url)
-        time.sleep(15)
-
         script = """
         if (window.location.href === "https://webdt.edunet.net/pdf") {
             console.log("Extracting...");
@@ -44,21 +51,28 @@ def run_selenium_script(url, user_data_dir, download_dir):
         """
         driver.execute_script(script)
 
-        time.sleep(15)
+        time.sleep(10)
 
         os.startfile(download_dir)
 
     finally:
-        driver.quit()
+        driver.close()
 
 if __name__ == "__main__":
     username = getpass.getuser()
     user_data_directory = f'C:\\Users\\{username}\\AppData\\Local\\Google\\Chrome\\User Data\\Default'
     download_directory = f'C:\\Users\\{username}\\Downloads'
 
+    driver = webdriver.Chrome(options=webdriver.ChromeOptions())
+    driver.get("https://webdt.edunet.net/login")
+
+    input("Please log in")
+
+    wait_and_redirect(driver, "https://webdt.edunet.net/")
+
     user_url = input("Enter the URL: ")
 
     if user_url.startswith("https://webdt.edunet.net/url/"):
-        run_selenium_script(user_url, user_data_directory, download_directory)
+        run_selenium_script(driver, user_url, user_data_directory, download_directory)
     else:
         print("Invalid URL pattern. Please provide a valid URL.")
